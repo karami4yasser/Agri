@@ -26,7 +26,7 @@ const Product = forwardRef(({ result }, ref) => {
     <div
       ref={ref}
       id={result.id}
-      className="group  border-2 forsmall:border-0
+      className="group  border-2 forsmall:border-2
        cursor-pointer p-4 m-2
         transition duration-200
          ease-in transform 
@@ -45,7 +45,7 @@ const Product = forwardRef(({ result }, ref) => {
           {result.title}
         </h2>
         <p
-          className="flex items-center opacity-0 
+          className="flex items-center opacity-0 forsmall:opacity-100
         transition-all duration-200 ease-in-out 
         group-hover:opacity-100"
         >

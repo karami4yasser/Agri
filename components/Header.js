@@ -13,26 +13,23 @@ import Image from "next/image";
 import HeaderItem from "./HeaderItem";
 import { useStateValues } from "./StateProvider";
 import { useRouter } from "next/router";
-
+import { auth } from "./firebase";
+import { useHistory } from "react-router-dom";
 //import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import { signOut } from "firebase/auth";
 
 function Header() {
   const [{ basket, user }, dispatch] = useStateValues();
   const router = useRouter();
-
-  const addToBasket = () => {
-    dispatch({
-      type: "ADD_TO_BASKET",
-      item: {
-        id: "id",
-
-        title: "title",
-        image: "image",
-        price: "price",
-        rating: "rating",
-      },
-    });
+  const history = useHistory();
+  const handleAuth = () => {
+    if (user) {
+      signOut(auth);
+    } else {
+      router.push("/login");
+    }
   };
+
   return (
     <header
       className="flex flex-col sm:flex-row m-5
@@ -46,12 +43,16 @@ function Header() {
           title="HOME"
           Icon={HomeIcon}
           Function={() => {
-            alert("test");
+            router.push("/");
           }}
         />
         <HeaderItem title="SEARCH" Icon={SearchCircleIcon} />
 
-        <HeaderItem title={user ? user.email : "Sign In"} Icon={UserIcon} />
+        <HeaderItem
+          title={user ? user.email : "Sign In"}
+          Icon={UserIcon}
+          Function={handleAuth}
+        />
         <HeaderItem
           title={basket?.length}
           Icon={ShoppingCartIcon}

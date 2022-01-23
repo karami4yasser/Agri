@@ -10,7 +10,7 @@ function HeaderItem({ title, Icon, Function }) {
         <Icon className="h-8 mb-1 group-hover:animate-bounce" />
         <p
           className="opacity-0 tracking-widest
-         group-hover:opacity-100"
+         group-hover:opacity-100 whitespace-nowrap "
         >
           {title}
         </p>
